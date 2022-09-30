@@ -1,6 +1,8 @@
 package dendron;
 
 import dendron.treenodes.ActionNode;
+import dendron.treenodes.ExpressionNode;
+import dendron.treenodes.PrintExpression;
 
 import java.io.PrintWriter;
 import java.util.List;
@@ -23,6 +25,10 @@ public class ParseTree {
      */
     public ParseTree( List< String > tokens ) {
         // TODO
+        var tok = tokens.remove(0);
+        return switch (tok){
+            case "#" -> PrintExpression(tok);
+        }
     }
 
     /**
