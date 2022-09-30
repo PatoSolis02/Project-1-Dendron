@@ -1,15 +1,16 @@
 package dendron.treenodes;
 
-import javax.swing.*;
 import java.io.PrintWriter;
 import java.util.Map;
 
-public class PrintExpression implements ActionNode {
-    private DendronNode toPrint;
+public class Print implements ActionNode{
 
-    public PrintExpression(DendronNode toPrint){
-        this.toPrint = toPrint;
+    private ExpressionNode printee;
+
+    public Print(ExpressionNode printee){
+        this.printee = printee;
     }
+
     @Override
     public void execute(Map<String, Integer> symTab) {
 
@@ -17,7 +18,8 @@ public class PrintExpression implements ActionNode {
 
     @Override
     public void infixDisplay() {
-        System.out.println("Print " + this.toPrint);
+        System.out.print("Print ");
+        this.printee.infixDisplay();
     }
 
     @Override

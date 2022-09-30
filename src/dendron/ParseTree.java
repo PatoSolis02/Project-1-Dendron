@@ -1,20 +1,21 @@
 package dendron;
 
-import dendron.treenodes.ActionNode;
-import dendron.treenodes.ExpressionNode;
-import dendron.treenodes.PrintExpression;
+import dendron.treenodes.*;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Operations that are done on a Dendron code parse tree.
  *
- * @author YOUR NAME HERE
+ * @author Patricio Solis
  */
+
 public class ParseTree {
 
+    private Program program;
     /**
      * Parse the entire list of program tokens. The program is a
      * sequence of actions (statements), each of which modifies something
@@ -25,10 +26,39 @@ public class ParseTree {
      */
     public ParseTree( List< String > tokens ) {
         // TODO
-        var tok = tokens.remove(0);
-        return switch (tok){
-            case "#" -> PrintExpression(tok);
+        this.program = new Program();
+        System.out.println("tokens: " + tokens);
+        while(tokens.size() > 0){
+            String action = tokens.remove(0);
+            if(action.equals("#")){
+                // create a Print node
+                Print print = new Print(parse(tokens));
+                program.addAction(print);
+            }else if(action.equals(":=")){
+                // create an Assignment node
+                Assignment assign = new Assignment((tokens.remove(0)), parse(tokens));
+                program.addAction(assign);
+            }else{
+                System.out.println("Please input # or :=");
+            }
         }
+    }
+
+    private ExpressionNode parse(List< String > tokens){
+        String tok = tokens.remove(0);
+        if(tok.matches("-?\\d+")){
+            return new Constant(Integer.parseInt(tok));
+        }
+        if(tok.matches("^[a-zA-Z].*")){
+            return new Variable(tok);
+        }
+        if(BinaryOperation.OPERATORS.contains(tok)){
+            return new BinaryOperation(tok, parse(tokens), parse(tokens));
+        }
+        if(UnaryOperation.OPERATORS.contains(tok)){
+            return new UnaryOperation(tok, parse(tokens));
+        }
+        return null;
     }
 
     /**
@@ -37,7 +67,7 @@ public class ParseTree {
      * @see ActionNode#infixDisplay()
      */
     public void displayProgram() {
-        // TODO
+        this.program.infixDisplay();
     }
 
     /**
