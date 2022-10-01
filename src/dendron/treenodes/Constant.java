@@ -50,6 +50,6 @@ public class Constant implements ExpressionNode{
      */
     @Override
     public int evaluate(Map<String, Integer> symTab) {
-        return 0;
+        return this.value;
     }
 }

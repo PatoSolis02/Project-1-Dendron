@@ -10,33 +10,49 @@ import java.util.Map;
  *
  * @author Patricio Solis
  */
-public class BinaryOperation implements ExpressionNode{
+public class BinaryOperation implements ExpressionNode {
 
-    /** The operator symbol used for addition */
+    /**
+     * The operator symbol used for addition
+     */
     public static final String ADD = "+";
-    /** The operator symbol used for subtraction */
+    /**
+     * The operator symbol used for subtraction
+     */
     public static final String SUB = "-";
-    /** The operator symbol used for multiplication */
+    /**
+     * The operator symbol used for multiplication
+     */
     public static final String MUL = "*";
-    /** The operator symbol used for division */
+    /**
+     * The operator symbol used for division
+     */
     public static final String DIV = "/";
-    /** Container of all legal binary operators, for use by parsers */
+    /**
+     * Container of all legal binary operators, for use by parsers
+     */
     public static final Collection<String> OPERATORS = Arrays.asList(ADD, SUB, MUL, DIV);
-    /** the string rep. of the operation */
+    /**
+     * the string rep. of the operation
+     */
     private String operator;
-    /** the left operand */
+    /**
+     * the left operand
+     */
     private ExpressionNode left;
-    /** the right operand */
+    /**
+     * the right operand
+     */
     private ExpressionNode right;
 
     /**
      * Create a new BinaryOperation node.
      *
      * @param operator the string rep. of the operation
-     * @param left the left operand
-     * @param right the right operand
+     * @param left     the left operand
+     * @param right    the right operand
      */
-    public BinaryOperation(String operator, ExpressionNode left, ExpressionNode right){
+    public BinaryOperation(String operator, ExpressionNode left, ExpressionNode right) {
         this.operator = operator;
         this.left = left;
         this.right = right;
@@ -46,13 +62,12 @@ public class BinaryOperation implements ExpressionNode{
      * Print, on standard output, the infixDisplay of the two child nodes
      * separated by the operator and surrounded by parentheses. Blanks are
      * inserted throughout.
-     *
      */
     @Override
     public void infixDisplay() {
         System.out.print("(");
         this.left.infixDisplay();
-        System.out.print( " " + this.operator + " ");
+        System.out.print(" " + this.operator + " ");
         this.right.infixDisplay();
         System.out.print(")");
     }
@@ -77,6 +92,12 @@ public class BinaryOperation implements ExpressionNode{
      */
     @Override
     public int evaluate(Map<String, Integer> symTab) {
-        return 0;
+        return switch (this.operator) {
+            case ADD -> this.left.evaluate(symTab) + this.right.evaluate(symTab);
+            case SUB -> this.left.evaluate(symTab) - this.right.evaluate(symTab);
+            case MUL -> this.left.evaluate(symTab) * this.right.evaluate(symTab);
+            case DIV -> this.left.evaluate(symTab) / this.right.evaluate(symTab);
+            default -> 0;
+        };
     }
 }

@@ -30,7 +30,7 @@ public class Print implements ActionNode{
      */
     @Override
     public void execute(Map<String, Integer> symTab) {
-
+        System.out.println("=== " + this.printee.evaluate(symTab));
     }
 
     /**

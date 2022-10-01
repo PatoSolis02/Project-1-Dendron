@@ -4,6 +4,7 @@ import dendron.treenodes.*;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +74,9 @@ public class ParseTree {
      * @see ActionNode#infixDisplay()
      */
     public void displayProgram() {
+        System.out.println("The Program, with expressions in infix notation: ");
         this.program.infixDisplay();
+        System.out.println();
     }
 
     /**
@@ -81,7 +84,10 @@ public class ParseTree {
      * @see ActionNode#execute(Map)
      */
     public void interpret() {
-        // TODO
+        System.out.println("Interpreting the parse tree...");
+        this.program.execute(new HashMap<>());
+        System.out.println("Interpretation complete.");
+
     }
 
     /**

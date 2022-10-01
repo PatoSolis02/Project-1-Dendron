@@ -64,6 +64,10 @@ public class UnaryOperation implements ExpressionNode{
      */
     @Override
     public int evaluate(Map<String, Integer> symTab) {
-        return 0;
+        return switch (this.operator){
+            case NEG -> -(this.expr.evaluate(symTab));
+            case SQRT -> (int) Math.pow(this.expr.evaluate(symTab), 0.5);
+            default -> 0;
+        };
     }
 }

@@ -50,6 +50,6 @@ public class Variable implements ExpressionNode{
      */
     @Override
     public int evaluate(Map<String, Integer> symTab) {
-        return 0;
+        return symTab.get(this.name);
     }
 }
