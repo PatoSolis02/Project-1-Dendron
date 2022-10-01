@@ -1,6 +1,7 @@
 package dendron.treenodes;
 
 import dendron.Errors;
+import dendron.machine.Soros;
 
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -87,10 +88,10 @@ public class BinaryOperation implements ExpressionNode {
         this.left.compile(out);
         this.right.compile(out);
         switch (this.operator) {
-            case ADD -> System.out.println("ADD");
-            case SUB -> System.out.println("SUB");
-            case MUL -> System.out.println("MUL");
-            case DIV -> System.out.println("DIV");
+            case ADD -> System.out.println(Soros.ADD);
+            case SUB -> System.out.println(Soros.SUBTRACT);
+            case MUL -> System.out.println(Soros.MULTIPLY);
+            case DIV -> System.out.println(Soros.DIVIDE);
         }
     }
 

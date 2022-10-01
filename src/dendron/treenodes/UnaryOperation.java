@@ -1,5 +1,7 @@
 package dendron.treenodes;
 
+import dendron.machine.Soros;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,9 +58,9 @@ public class UnaryOperation implements ExpressionNode{
     public void compile(PrintWriter out) {
         this.expr.compile(out);
         if(this.operator.equals(NEG)){
-            System.out.println("NEG");
+            System.out.println(Soros.NEGATE);
         } else {
-            System.out.println("SQRT");
+            System.out.println(Soros.SQUARE_ROOT);
         }
     }
 

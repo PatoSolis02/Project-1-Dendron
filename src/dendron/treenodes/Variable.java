@@ -1,6 +1,7 @@
 package dendron.treenodes;
 
 import dendron.Errors;
+import dendron.machine.Soros;
 
 import java.io.PrintWriter;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class Variable implements ExpressionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-        System.out.println("LOAD " + this.name);
+        System.out.println(Soros.LOAD + " " + this.name);
     }
 
     /**

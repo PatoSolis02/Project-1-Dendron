@@ -1,5 +1,7 @@
 package dendron.treenodes;
 
+import dendron.machine.Soros;
+
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -39,7 +41,7 @@ public class Constant implements ExpressionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-        System.out.println("PUSH " + this.value);
+        System.out.println(Soros.PUSH + " " + this.value);
     }
 
     /**
