@@ -39,7 +39,7 @@ public class Constant implements ExpressionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-
+        System.out.println("PUSH " + this.value);
     }
 
     /**

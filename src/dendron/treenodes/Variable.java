@@ -39,7 +39,7 @@ public class Variable implements ExpressionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-
+        System.out.println("LOAD " + this.name);
     }
 
     /**

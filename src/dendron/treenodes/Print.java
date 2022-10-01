@@ -53,6 +53,7 @@ public class Print implements ActionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-
+        this.printee.compile(out);
+        System.out.println("PRINT");
     }
 }

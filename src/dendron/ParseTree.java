@@ -86,7 +86,6 @@ public class ParseTree {
     public void interpret() {
         System.out.println("Interpreting the parse tree...");
         this.program.execute(new HashMap<>());
-        System.out.println("Interpretation complete.");
 
     }
 
@@ -98,5 +97,6 @@ public class ParseTree {
      */
     public void compileTo( PrintWriter out ) {
         // TODO
+        this.program.compile(out);
     }
 }

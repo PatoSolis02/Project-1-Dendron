@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A calculation represented by a unary operator and its operand.
@@ -53,7 +54,12 @@ public class UnaryOperation implements ExpressionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-
+        this.expr.compile(out);
+        if(this.operator.equals(NEG)){
+            System.out.println("NEG");
+        } else {
+            System.out.println("SQRT");
+        }
     }
 
     /**

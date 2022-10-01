@@ -54,6 +54,7 @@ public class Assignment implements ActionNode{
      */
     @Override
     public void compile(PrintWriter out) {
-
+        this.rhs.compile(out);
+        System.out.println("STORE " + this.ident);
     }
 }

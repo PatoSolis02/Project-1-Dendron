@@ -1,5 +1,7 @@
 package dendron.treenodes;
 
+import dendron.Errors;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class Program {
         for ( ActionNode an: this.actions ) {
             an.execute( symTab );
         }
+        System.out.println("Interpretation complete.\n");
+        Errors.dump(symTab);
     }
 
     /**

@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A calculation represented by a binary operator and its two operands.
@@ -81,7 +82,14 @@ public class BinaryOperation implements ExpressionNode {
      */
     @Override
     public void compile(PrintWriter out) {
-
+        this.left.compile(out);
+        this.right.compile(out);
+        switch (this.operator) {
+            case ADD -> System.out.println("ADD");
+            case SUB -> System.out.println("SUB");
+            case MUL -> System.out.println("MUL");
+            case DIV -> System.out.println("DIV");
+        }
     }
 
     /**
