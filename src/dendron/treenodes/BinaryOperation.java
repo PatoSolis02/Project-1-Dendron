@@ -1,5 +1,7 @@
 package dendron.treenodes;
 
+import dendron.Errors;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collection;
@@ -100,12 +102,17 @@ public class BinaryOperation implements ExpressionNode {
      */
     @Override
     public int evaluate(Map<String, Integer> symTab) {
-        return switch (this.operator) {
-            case ADD -> this.left.evaluate(symTab) + this.right.evaluate(symTab);
-            case SUB -> this.left.evaluate(symTab) - this.right.evaluate(symTab);
-            case MUL -> this.left.evaluate(symTab) * this.right.evaluate(symTab);
-            case DIV -> this.left.evaluate(symTab) / this.right.evaluate(symTab);
-            default -> 0;
-        };
+        if(this.operator.equals(ADD)){
+            return this.left.evaluate(symTab) + this.right.evaluate(symTab);
+        } else if (this.operator.equals(SUB)){
+            return this.left.evaluate(symTab) - this.right.evaluate(symTab);
+        } else if (this.operator.equals(MUL)){
+            return this.left.evaluate(symTab) * this.right.evaluate(symTab);
+        } else {
+            if(this.right.evaluate(symTab) == 0){
+                Errors.report(Errors.Type.DIVIDE_BY_ZERO, this.right.evaluate(symTab));
+            }
+            return this.left.evaluate(symTab) / this.right.evaluate(symTab);
+        }
     }
 }

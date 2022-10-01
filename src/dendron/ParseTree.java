@@ -33,14 +33,24 @@ public class ParseTree {
             String action = tokens.remove(0);
             if(action.equals("#")){
                 // create a Print node
+                if(tokens.size() == 0){
+                    Errors.report(Errors.Type.PREMATURE_END, null);
+                }
                 Print print = new Print(parse(tokens));
                 program.addAction(print);
             }else if(action.equals(":=")){
                 // create an Assignment node
-                Assignment assign = new Assignment((tokens.remove(0)), parse(tokens));
+                if(tokens.size() < 2){
+                    Errors.report(Errors.Type.PREMATURE_END, null);
+                }
+                String nextTok = tokens.remove(0);
+                if(nextTok.matches("-?\\d+")){
+                    Errors.report(Errors.Type.ILLEGAL_VALUE, nextTok );
+                }
+                Assignment assign = new Assignment(nextTok, parse(tokens));
                 program.addAction(assign);
             }else{
-                System.out.println("Please input # or :=");
+                Errors.report(Errors.Type.ILLEGAL_VALUE, action);
             }
         }
     }
@@ -51,19 +61,24 @@ public class ParseTree {
      * @param tokens List<String>, the tokens to interpret.
      * @return an ExpressionNode of necessary actions
      */
-    private ExpressionNode parse(List< String > tokens){
+    private ExpressionNode parse(List< String > tokens) {
         String tok = tokens.remove(0);
-        if(tok.matches("-?\\d+")){
+        if (tok.matches("-?\\d+")) {
             return new Constant(Integer.parseInt(tok));
-        }
-        if(tok.matches("^[a-zA-Z].*")){
+        } else if (tok.matches("^[a-zA-Z].*")) {
             return new Variable(tok);
-        }
-        if(BinaryOperation.OPERATORS.contains(tok)){
+        } else if (BinaryOperation.OPERATORS.contains(tok)) {
+            if(tokens.size() < 2){
+                Errors.report(Errors.Type.PREMATURE_END, null);
+            }
             return new BinaryOperation(tok, parse(tokens), parse(tokens));
-        }
-        if(UnaryOperation.OPERATORS.contains(tok)){
+        } else if (UnaryOperation.OPERATORS.contains(tok)) {
+            if(tokens.size() < 1){
+                Errors.report(Errors.Type.PREMATURE_END, null);
+            }
             return new UnaryOperation(tok, parse(tokens));
+        } else {
+            Errors.report(Errors.Type.ILLEGAL_VALUE, tok);
         }
         return null;
     }
