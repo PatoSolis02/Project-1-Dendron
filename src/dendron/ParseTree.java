@@ -44,6 +44,12 @@ public class ParseTree {
         }
     }
 
+    /**
+     * Recursively parses through token list to interpret what Expression has to do.
+     *
+     * @param tokens List<String>, the tokens to interpret.
+     * @return an ExpressionNode of necessary actions
+     */
     private ExpressionNode parse(List< String > tokens){
         String tok = tokens.remove(0);
         if(tok.matches("-?\\d+")){
