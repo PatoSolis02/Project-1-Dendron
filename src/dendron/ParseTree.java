@@ -28,7 +28,6 @@ public class ParseTree {
     public ParseTree( List< String > tokens ) {
         // TODO
         this.program = new Program();
-        System.out.println("tokens: " + tokens);
         while(tokens.size() > 0){
             String action = tokens.remove(0);
             if(action.equals("#")){
@@ -89,7 +88,7 @@ public class ParseTree {
      * @see ActionNode#infixDisplay()
      */
     public void displayProgram() {
-        System.out.println("The Program, with expressions in infix notation: ");
+        System.out.println("The Program, with expressions in infix notation: \n");
         this.program.infixDisplay();
         System.out.println();
     }
