@@ -103,17 +103,18 @@ public class BinaryOperation implements ExpressionNode {
      */
     @Override
     public int evaluate(Map<String, Integer> symTab) {
-        if(this.operator.equals(ADD)){
-            return this.left.evaluate(symTab) + this.right.evaluate(symTab);
-        } else if (this.operator.equals(SUB)){
-            return this.left.evaluate(symTab) - this.right.evaluate(symTab);
-        } else if (this.operator.equals(MUL)){
-            return this.left.evaluate(symTab) * this.right.evaluate(symTab);
-        } else {
-            if(this.right.evaluate(symTab) == 0){
-                Errors.report(Errors.Type.DIVIDE_BY_ZERO, this.right.evaluate(symTab));
-            }
-            return this.left.evaluate(symTab) / this.right.evaluate(symTab);
+        switch (this.operator) {
+            case ADD:
+                return this.left.evaluate(symTab) + this.right.evaluate(symTab);
+            case SUB:
+                return this.left.evaluate(symTab) - this.right.evaluate(symTab);
+            case MUL:
+                return this.left.evaluate(symTab) * this.right.evaluate(symTab);
+            default:
+                if (this.right.evaluate(symTab) == 0) {
+                    Errors.report(Errors.Type.DIVIDE_BY_ZERO, this.right.evaluate(symTab));
+                }
+                return this.left.evaluate(symTab) / this.right.evaluate(symTab);
         }
     }
 }

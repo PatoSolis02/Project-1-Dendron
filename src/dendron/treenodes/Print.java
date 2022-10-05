@@ -24,7 +24,7 @@ public class Print implements ActionNode{
 
     /**
      * Evaluate the expression and display the result on the console.
-     * Precede it with three equal signs so it stands out a little.
+     * Precede it with three equal signs, so it stands out a little.
      *
      * @param symTab the table where variable values are stored
      */
